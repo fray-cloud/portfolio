@@ -15,6 +15,7 @@
   --muted: #6b7280;
   --border: #e5e7eb;
   --card: #f9fafb;
+  --section-alt: #f3f4f6;
 }
 
 .dark {
@@ -23,6 +24,7 @@
   --muted: #9ca3af;
   --border: #27272a;
   --card: #18181b;
+  --section-alt: #111113;
 }
 
 html {
