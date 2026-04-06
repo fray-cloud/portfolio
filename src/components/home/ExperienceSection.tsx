@@ -13,13 +13,22 @@ export default function ExperienceSection() {
 
     (async () => {
       const { animate, stagger } = await import("animejs");
-      const items = itemsRef.current!.querySelectorAll("[data-exp-item]");
-      animate(items, {
+      // Animate the line drawing
+      const line = itemsRef.current!.querySelector("[data-timeline-line]");
+      if (line) {
+        animate(line, {
+          scaleX: [0, 1],
+          duration: 800,
+          ease: "outQuad",
+        });
+      }
+      // Animate each block
+      const blocks = itemsRef.current!.querySelectorAll("[data-exp-block]");
+      animate(blocks, {
         opacity: [0, 1],
-        translateX: ((_el: unknown, i: number) =>
-          i % 2 === 0 ? [-40, 0] : [40, 0]) as Parameters<typeof animate>[1]["translateX"],
+        translateY: [20, 0],
         duration: 600,
-        delay: stagger(150),
+        delay: stagger(200, { start: 400 }),
         ease: "outQuad",
       });
     })();
@@ -28,7 +37,7 @@ export default function ExperienceSection() {
   return (
     <section id="experience" className="mx-auto max-w-5xl px-6 py-24" ref={ref}>
       <h2
-        className={`mb-12 text-3xl font-bold tracking-tight transition-all duration-700 ${
+        className={`mb-16 text-3xl font-bold tracking-tight transition-all duration-700 ${
           inView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
         style={{ color: "var(--foreground)" }}
@@ -36,66 +45,49 @@ export default function ExperienceSection() {
         Experience
       </h2>
 
-      <div className="relative" ref={itemsRef}>
-        {/* Timeline line */}
+      <div ref={itemsRef} className="relative">
+        {/* Horizontal timeline line */}
         <div
-          className="absolute left-4 top-0 bottom-0 w-px md:left-1/2"
-          style={{ background: "var(--border)" }}
+          data-timeline-line
+          className="absolute top-6 left-0 right-0 h-px origin-left"
+          style={{ background: "var(--border)", transform: "scaleX(0)" }}
         />
 
-        {EXPERIENCES.map((exp, i) => (
-          <div
-            key={exp.role}
-            className="relative mb-12 opacity-0"
-            data-exp-item
-          >
-            <div
-              className="absolute left-4 -translate-x-1/2 md:left-1/2"
-              style={{ top: "6px" }}
-            >
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+          {EXPERIENCES.map((exp) => (
+            <div key={exp.role} data-exp-block className="relative pt-10 opacity-0">
+              {/* Dot on the line */}
               <div
-                className="h-3 w-3 rounded-full"
+                className="absolute top-4 left-0 h-3 w-3 -translate-y-1/2 rounded-full sm:left-1/2 sm:-translate-x-1/2"
                 style={{ background: "var(--color-accent)" }}
               />
-            </div>
 
-            <div
-              className={`ml-10 ${
-                i % 2 === 0
-                  ? "md:ml-0 md:mr-[50%] md:pr-12 md:text-right"
-                  : "md:ml-[50%] md:pl-12"
-              }`}
-            >
-              <h3
-                className="text-lg font-semibold"
-                style={{ color: "var(--foreground)" }}
-              >
-                {exp.role}
-              </h3>
-              <p className="mb-3 text-sm" style={{ color: "var(--muted)" }}>
-                {exp.period}
-              </p>
-              <ul className="space-y-2">
-                {exp.items.map((item) => (
-                  <li key={item.name}>
-                    <span
-                      className="font-medium"
-                      style={{ color: "var(--foreground)" }}
-                    >
-                      {item.name}
-                    </span>
-                    <span
-                      className="ml-2 text-sm"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      — {item.description}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              <div className="sm:text-center">
+                <h3
+                  className="text-lg font-semibold"
+                  style={{ color: "var(--foreground)" }}
+                >
+                  {exp.role}
+                </h3>
+                <p
+                  className="mt-1 text-sm"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {exp.period}
+                </p>
+                <span
+                  className="mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold"
+                  style={{
+                    background: "var(--color-accent)",
+                    color: "#fff",
+                  }}
+                >
+                  {exp.duration}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -17,15 +17,24 @@ export interface Heading {
   level: number;
 }
 
-export interface Project {
-  title: string;
-  description: string;
-  tech: string[];
-  link?: string;
-}
-
 export interface Experience {
   role: string;
   period: string;
-  items: { name: string; description: string }[];
+  duration: string;
+}
+
+export interface ProjectDetail {
+  title: string;
+  role: string;
+  period: string;
+  partner?: string;
+  tech: string[];
+  link?: string;
+  sections: ProjectSection[];
+  achievements: string[];
+}
+
+export interface ProjectSection {
+  title: string;
+  items: string[];
 }
