@@ -21,6 +21,7 @@ export interface Experience {
   role: string;
   period: string;
   duration: string;
+  projects: { name: string; duration: string }[];
 }
 
 export interface ProjectDetail {

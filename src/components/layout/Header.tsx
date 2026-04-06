@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
-import Link from "next/link";
-import { NAV_ITEMS } from "@/lib/constants";
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
+import Link from 'next/link';
+import { NAV_ITEMS } from '@/lib/constants';
 
 export default function Header() {
   const { theme, setTheme } = useTheme();
@@ -21,15 +21,15 @@ export default function Header() {
       setHidden(y > 80 && y > lastY);
       setLastY(y);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, [lastY, menuOpen]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, [menuOpen]);
 
@@ -37,17 +37,17 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
-          hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"
+          hidden && !menuOpen ? '-translate-y-full' : 'translate-y-0'
         }`}
-        style={{ background: "var(--background)" }}
+        style={{ background: 'var(--background)' }}
       >
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link
             href="/"
             className="text-lg font-bold tracking-tight"
-            style={{ color: "var(--foreground)" }}
+            style={{ color: 'var(--foreground)' }}
           >
-            WH.
+            fray-cloud
           </Link>
 
           {/* Desktop nav */}
@@ -57,14 +57,14 @@ export default function Header() {
                 key={label}
                 href={href}
                 className="text-sm font-medium transition-colors hover:text-[var(--color-accent)]"
-                style={{ color: "var(--muted)" }}
+                style={{ color: 'var(--muted)' }}
               >
                 {label}
               </Link>
             ))}
             {mounted && (
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-[var(--card)]"
                 aria-label="Toggle theme"
               >
@@ -77,7 +77,7 @@ export default function Header() {
           <div className="flex items-center gap-3 md:hidden">
             {mounted && (
               <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                 className="flex h-8 w-8 items-center justify-center rounded-full transition-colors hover:bg-[var(--card)]"
                 aria-label="Toggle theme"
               >
@@ -93,29 +93,29 @@ export default function Header() {
                 <span
                   className="absolute left-0 h-0.5 w-5 transition-all duration-300"
                   style={{
-                    background: "var(--foreground)",
-                    top: menuOpen ? "50%" : "0",
+                    background: 'var(--foreground)',
+                    top: menuOpen ? '50%' : '0',
                     transform: menuOpen
-                      ? "translateY(-50%) rotate(45deg)"
-                      : "none",
+                      ? 'translateY(-50%) rotate(45deg)'
+                      : 'none',
                   }}
                 />
                 <span
                   className="absolute left-0 top-1/2 h-0.5 w-5 -translate-y-1/2 transition-opacity duration-300"
                   style={{
-                    background: "var(--foreground)",
+                    background: 'var(--foreground)',
                     opacity: menuOpen ? 0 : 1,
                   }}
                 />
                 <span
                   className="absolute left-0 h-0.5 w-5 transition-all duration-300"
                   style={{
-                    background: "var(--foreground)",
-                    bottom: menuOpen ? "auto" : "0",
-                    top: menuOpen ? "50%" : "auto",
+                    background: 'var(--foreground)',
+                    bottom: menuOpen ? 'auto' : '0',
+                    top: menuOpen ? '50%' : 'auto',
                     transform: menuOpen
-                      ? "translateY(-50%) rotate(-45deg)"
-                      : "none",
+                      ? 'translateY(-50%) rotate(-45deg)'
+                      : 'none',
                   }}
                 />
               </div>
@@ -128,10 +128,10 @@ export default function Header() {
       <div
         className={`fixed inset-0 z-40 flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
           menuOpen
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
+            ? 'pointer-events-auto opacity-100'
+            : 'pointer-events-none opacity-0'
         }`}
-        style={{ background: "var(--background)" }}
+        style={{ background: 'var(--background)' }}
       >
         <nav className="flex flex-col items-center gap-8">
           {NAV_ITEMS.map(({ label, href }) => (
@@ -140,7 +140,7 @@ export default function Header() {
               href={href}
               onClick={() => setMenuOpen(false)}
               className="text-3xl font-bold transition-colors hover:text-[var(--color-accent)]"
-              style={{ color: "var(--foreground)" }}
+              style={{ color: 'var(--foreground)' }}
             >
               {label}
             </Link>
@@ -152,7 +152,7 @@ export default function Header() {
 }
 
 function ThemeIcon({ theme }: { theme: string | undefined }) {
-  if (theme === "dark") {
+  if (theme === 'dark') {
     return (
       <svg
         width="16"

@@ -61,6 +61,21 @@ body {
   --tw-prose-pre-code: var(--foreground);
 }
 
+/* Inline code styling */
+.prose :not(pre) > code {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.875em;
+  color: var(--foreground);
+}
+
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
+}
+
 /* Code block styling */
 pre code.hljs {
   background: transparent;

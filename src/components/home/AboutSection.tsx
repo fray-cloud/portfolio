@@ -7,7 +7,7 @@ import { useScrollAnimation } from "@/components/animations/useScrollAnimation";
 import RollingText from "@/components/animations/RollingText";
 
 const ROLES = [
-  "풀스택 엔지니어",
+  "Full-Stack Engineer",
   "Platform Engineer",
   "Solution Architect",
   "DevOps Engineer",
@@ -89,7 +89,7 @@ export default function AboutSection() {
 
       <div
         ref={badgesRef}
-        className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+        className="mt-12 grid gap-8 grid-cols-2 md:grid-cols-4"
       >
         {Object.entries(SKILLS).map(([category, skills]) => (
           <div key={category}>

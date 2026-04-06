@@ -13,9 +13,9 @@ export default function GiscusComments() {
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.setAttribute("data-repo", "fray-cloud/portfolio");
-    script.setAttribute("data-repo-id", "");
+    script.setAttribute("data-repo-id", "R_kgDOR7Fa-A");
     script.setAttribute("data-category", "General");
-    script.setAttribute("data-category-id", "");
+    script.setAttribute("data-category-id", "DIC_kwDOR7Fa-M4C6LJv");
     script.setAttribute("data-mapping", "pathname");
     script.setAttribute("data-strict", "0");
     script.setAttribute("data-reactions-enabled", "1");
@@ -26,6 +26,7 @@ export default function GiscusComments() {
       theme === "dark" ? "dark" : "light"
     );
     script.setAttribute("data-lang", "ko");
+    script.setAttribute("data-loading", "lazy");
     script.crossOrigin = "anonymous";
     script.async = true;
 

@@ -45,42 +45,40 @@ export default function ProjectsSection() {
             <button
               key={project.title}
               onClick={() => setSelectedIdx(i)}
-              className="group rounded-xl p-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              className="group cursor-pointer rounded-xl p-6 text-left opacity-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               style={{
                 background: "var(--card)",
                 border: "1px solid var(--border)",
               }}
             >
-              <div className="mb-3 flex items-center justify-between">
-                <h3
-                  className="text-lg font-semibold transition-colors group-hover:text-[var(--color-accent)]"
-                  style={{ color: "var(--foreground)" }}
-                >
-                  {project.title}
-                  {project.link && (
-                    <span className="ml-1 text-xs" style={{ color: "var(--muted)" }}>
-                      ↗
-                    </span>
-                  )}
-                </h3>
-              </div>
+              <h3
+                className="truncate text-lg font-semibold transition-colors group-hover:text-[var(--color-accent)]"
+                style={{ color: "var(--foreground)" }}
+              >
+                {project.title}
+                {project.link && (
+                  <span className="ml-1 text-xs" style={{ color: "var(--muted)" }}>
+                    ↗
+                  </span>
+                )}
+              </h3>
               <p
-                className="mb-1 text-xs"
+                className="mt-1 text-xs"
                 style={{ color: "var(--muted)" }}
               >
                 {project.period}
               </p>
               <p
-                className="mb-4 line-clamp-2 text-sm"
+                className="mt-2 truncate text-sm"
                 style={{ color: "var(--muted)" }}
               >
                 {project.role}
               </p>
-              <div className="flex flex-wrap gap-1.5">
-                {project.tech.slice(0, 4).map((t) => (
+              <div className="mt-4 flex items-center gap-1.5 overflow-hidden">
+                {project.tech.slice(0, 3).map((t) => (
                   <span
                     key={t}
-                    className="rounded px-2 py-0.5 text-xs"
+                    className="shrink-0 rounded px-2 py-0.5 text-xs"
                     style={{
                       background: "var(--background)",
                       color: "var(--muted)",
@@ -89,12 +87,12 @@ export default function ProjectsSection() {
                     {t}
                   </span>
                 ))}
-                {project.tech.length > 4 && (
+                {project.tech.length > 3 && (
                   <span
-                    className="rounded px-2 py-0.5 text-xs"
+                    className="shrink-0 text-xs"
                     style={{ color: "var(--muted)" }}
                   >
-                    +{project.tech.length - 4}
+                    +{project.tech.length - 3}
                   </span>
                 )}
               </div>

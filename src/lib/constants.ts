@@ -26,16 +26,30 @@ export const EXPERIENCES: Experience[] = [
     role: "Computer Vision Developer",
     period: "2020.11 ~ 2022.01",
     duration: "1년 2개월",
+    projects: [
+      { name: "수위 감지 시스템", duration: "6개월" },
+      { name: "영상 처리 개발", duration: "6개월" },
+    ],
   },
   {
     role: "Solution Engineer",
     period: "2022.01 ~ 2024.05",
     duration: "2년 4개월",
+    projects: [
+      { name: "FNU AICC 구축", duration: "8개월" },
+      { name: "사내 이슈 관리 자동화", duration: "1년" },
+      { name: "SKBCCC 유지보수", duration: "1년 9개월" },
+    ],
   },
   {
     role: "Platform Engineer",
     period: "2024.08 ~ 현재",
     duration: "1년 8개월",
+    projects: [
+      { name: "iOMS", duration: "진행 중" },
+      { name: "사내 홈페이지", duration: "1개월" },
+      { name: "공항자원배정 플랫폼", duration: "1년 3개월" },
+    ],
   },
 ];
 
@@ -290,5 +304,6 @@ export const PROJECTS: ProjectDetail[] = [
 
 export const CONTACT = {
   github: "https://github.com/fray-cloud",
+  linkedin: "https://www.linkedin.com/in/fray-cloud",
   email: "official.kwh94@gmail.com",
 } as const;
