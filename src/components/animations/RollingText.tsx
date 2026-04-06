@@ -15,6 +15,24 @@ export default function RollingText({
 }: RollingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLSpanElement>(null);
+  const measureRef = useRef<HTMLSpanElement>(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  // Measure the widest word to fix container size
+  useEffect(() => {
+    const measure = measureRef.current;
+    if (!measure) return;
+
+    let maxW = 0;
+    let maxH = 0;
+    const children = measure.children;
+    for (let i = 0; i < children.length; i++) {
+      const el = children[i] as HTMLElement;
+      maxW = Math.max(maxW, el.offsetWidth);
+      maxH = Math.max(maxH, el.offsetHeight);
+    }
+    setSize({ width: maxW, height: maxH });
+  }, [words]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,56 +43,80 @@ export default function RollingText({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || size.height === 0) return;
 
     (async () => {
       const { animate } = await import("animejs");
-      const children = container.children;
+      const children = container.querySelectorAll<HTMLElement>("[data-roll]");
 
-      // Animate out the previous word (slide up + fade)
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i] as HTMLElement;
+      children.forEach((child, i) => {
         if (i === currentIndex) {
-          child.style.position = "relative";
-          child.style.display = "block";
+          child.style.visibility = "visible";
           animate(child, {
-            translateY: [20, 0],
+            translateY: ["100%", "0%"],
             opacity: [0, 1],
             duration: 500,
             ease: "outQuad",
           });
         } else {
           animate(child, {
-            translateY: [0, -20],
+            translateY: ["0%", "-100%"],
             opacity: [1, 0],
             duration: 300,
             ease: "inQuad",
           }).then(() => {
-            child.style.display = "none";
+            child.style.visibility = "hidden";
           });
         }
-      }
+      });
     })();
-  }, [currentIndex]);
+  }, [currentIndex, size.height]);
 
   return (
-    <span
-      ref={containerRef}
-      className={`relative inline-block overflow-hidden ${className}`}
-      style={{ verticalAlign: "bottom" }}
-    >
-      {words.map((word, i) => (
-        <span
-          key={word}
-          className="whitespace-nowrap"
-          style={{
-            display: i === 0 ? "block" : "none",
-            color: "var(--color-accent)",
-          }}
-        >
-          {word}
-        </span>
-      ))}
-    </span>
+    <>
+      {/* Hidden measurer to get max width */}
+      <span
+        ref={measureRef}
+        className={className}
+        style={{
+          position: "absolute",
+          visibility: "hidden",
+          whiteSpace: "nowrap",
+          pointerEvents: "none",
+        }}
+        aria-hidden
+      >
+        {words.map((word) => (
+          <span key={word} style={{ display: "block" }}>
+            {word}
+          </span>
+        ))}
+      </span>
+
+      {/* Visible fixed-size container */}
+      <span
+        ref={containerRef}
+        className={`relative inline-block overflow-hidden ${className}`}
+        style={{
+          width: size.width || "auto",
+          height: size.height || "auto",
+          verticalAlign: "bottom",
+        }}
+      >
+        {words.map((word, i) => (
+          <span
+            key={word}
+            data-roll
+            className="absolute left-0 top-0 whitespace-nowrap"
+            style={{
+              color: "var(--color-accent)",
+              visibility: i === 0 ? "visible" : "hidden",
+            }}
+          >
+            {word}
+          </span>
+        ))}
+      </span>
+    </>
   );
 }
