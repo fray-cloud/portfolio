@@ -39,9 +39,9 @@ export default async function PostPage({
   const next = idx > 0 ? allPosts[idx - 1] : null;
 
   return (
-    <div className="mx-auto max-w-5xl px-6 py-24">
-      <article className="relative lg:grid lg:grid-cols-[1fr_200px] lg:gap-12">
-        <div>
+    <div className="mx-auto max-w-3xl px-6 py-24 lg:max-w-5xl">
+      <article className="relative lg:grid lg:grid-cols-[minmax(0,1fr)_200px] lg:gap-12">
+        <div className="min-w-0">
           <header className="mb-12">
             <time
               className="text-sm"

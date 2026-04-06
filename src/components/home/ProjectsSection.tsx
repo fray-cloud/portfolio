@@ -69,7 +69,7 @@ export default function ProjectsSection() {
                 {project.period}
               </p>
               <p
-                className="mt-2 truncate text-sm"
+                className="mt-2 line-clamp-2 text-sm sm:line-clamp-1"
                 style={{ color: "var(--muted)" }}
               >
                 {project.role}

@@ -77,6 +77,15 @@ body {
 }
 
 /* Code block styling */
+.prose pre {
+  overflow-x: auto;
+}
+
+.prose table {
+  display: block;
+  overflow-x: auto;
+}
+
 pre code.hljs {
   background: transparent;
   padding: 0;

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import Image from 'next/image';
 import { NAV_ITEMS } from '@/lib/constants';
 
 export default function Header() {
@@ -44,9 +45,10 @@ export default function Header() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <Link
             href="/"
-            className="text-lg font-bold tracking-tight"
+            className="flex items-center gap-2 text-lg font-bold tracking-tight"
             style={{ color: 'var(--foreground)' }}
           >
+            <Image src="/favicon.ico" alt="fray-cloud" width={24} height={24} />
             fray-cloud
           </Link>
 
