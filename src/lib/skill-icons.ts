@@ -1,0 +1,38 @@
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiSpringboot,
+  SiNestjs,
+  SiFastapi,
+  SiDocker,
+  SiKubernetes,
+  SiGitlab,
+  SiJenkins,
+  SiArgo,
+  SiOpencv,
+  SiPython,
+  SiApachekafka,
+  SiRedis,
+} from "react-icons/si";
+import { IconType } from "react-icons";
+
+export const SKILL_ICONS: Record<string, IconType> = {
+  React: SiReact,
+  "Next.js": SiNextdotjs,
+  TypeScript: SiTypescript,
+  "Tailwind CSS": SiTailwindcss,
+  "Spring Boot": SiSpringboot,
+  NestJS: SiNestjs,
+  FastAPI: SiFastapi,
+  Docker: SiDocker,
+  Kubernetes: SiKubernetes,
+  "GitLab CI": SiGitlab,
+  Jenkins: SiJenkins,
+  ArgoCD: SiArgo,
+  OpenCV: SiOpencv,
+  Python: SiPython,
+  Kafka: SiApachekafka,
+  Redis: SiRedis,
+};

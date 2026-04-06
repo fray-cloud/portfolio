@@ -1,38 +1,70 @@
 "use client";
 
-import { useSplitTextReveal } from "@/components/animations/useSplitTextReveal";
 import { useEffect, useRef } from "react";
 
 export default function HeroSection() {
-  const titleRef = useSplitTextReveal();
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const tagsRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = tagsRef.current;
-    if (!el) return;
+    const title = titleRef.current;
+    const tags = tagsRef.current;
+    const scroll = scrollRef.current;
+    if (!title || !tags || !scroll) return;
+
+    let cleanup: (() => void) | undefined;
 
     (async () => {
+      const { splitText } = await import("animejs");
       const { animate, stagger } = await import("animejs");
-      animate(el.children, {
+
+      const splitter = splitText(title);
+
+      // Step 1: Split text blur reveal
+      const titleAnim = animate(splitter.chars, {
+        opacity: [0, 1],
+        filter: ["blur(8px)", "blur(0px)"],
+        duration: 800,
+        delay: stagger(40),
+        ease: "outQuad",
+      });
+
+      // Step 2: After title completes → hashtags fade up
+      await titleAnim;
+
+      animate(tags.children, {
         translateY: [20, 0],
         opacity: [0, 1],
-        delay: stagger(100, { start: 600 }),
+        delay: stagger(100),
         duration: 600,
         ease: "outQuad",
       });
+
+      // Step 3: Scroll indicator fade in
+      animate(scroll, {
+        opacity: [0, 1],
+        duration: 800,
+        delay: 300,
+        ease: "outQuad",
+      });
+
+      cleanup = () => splitter.revert();
     })();
+
+    return () => cleanup?.();
   }, []);
 
   return (
     <section className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <h1
-        ref={titleRef as React.RefObject<HTMLHeadingElement>}
-        className="text-6xl font-black uppercase tracking-tighter sm:text-8xl"
+        ref={titleRef}
+        className="text-5xl font-black uppercase tracking-tighter sm:text-6xl md:text-8xl"
         style={{ color: "var(--foreground)" }}
       >
         Portfolio
       </h1>
-      <div ref={tagsRef} className="mt-6 flex gap-3">
+      <div ref={tagsRef} className="mt-6 flex flex-wrap justify-center gap-3">
         {["#FullStack", "#DevOps", "#Architect"].map((tag) => (
           <span
             key={tag}
@@ -43,7 +75,7 @@ export default function HeroSection() {
           </span>
         ))}
       </div>
-      <div className="mt-16 animate-bounce">
+      <div ref={scrollRef} className="mt-16 animate-bounce opacity-0">
         <svg
           width="24"
           height="24"

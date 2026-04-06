@@ -39,7 +39,7 @@ export default function ExperienceSection() {
       <div className="relative" ref={itemsRef}>
         {/* Timeline line */}
         <div
-          className="absolute left-4 top-0 bottom-0 w-px sm:left-1/2"
+          className="absolute left-4 top-0 bottom-0 w-px md:left-1/2"
           style={{ background: "var(--border)" }}
         />
 
@@ -50,7 +50,7 @@ export default function ExperienceSection() {
             data-exp-item
           >
             <div
-              className="absolute left-4 -translate-x-1/2 sm:left-1/2"
+              className="absolute left-4 -translate-x-1/2 md:left-1/2"
               style={{ top: "6px" }}
             >
               <div
@@ -60,10 +60,10 @@ export default function ExperienceSection() {
             </div>
 
             <div
-              className={`ml-10 sm:ml-0 ${
+              className={`ml-10 ${
                 i % 2 === 0
-                  ? "sm:mr-[50%] sm:pr-12 sm:text-right"
-                  : "sm:ml-[50%] sm:pl-12"
+                  ? "md:ml-0 md:mr-[50%] md:pr-12 md:text-right"
+                  : "md:ml-[50%] md:pl-12"
               }`}
             >
               <h3
