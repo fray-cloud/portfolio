@@ -1,17 +1,18 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import ThemeProvider from "@/components/layout/ThemeProvider";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import SmoothScroll from "@/components/layout/SmoothScroll";
-import { SITE } from "@/lib/constants";
-import "./globals.css";
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
+import ThemeProvider from '@/components/layout/ThemeProvider';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+import SmoothScroll from '@/components/layout/SmoothScroll';
+import { SITE } from '@/lib/constants';
+import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 
 const pretendard = localFont({
-  src: "../fonts/PretendardVariable.woff2",
-  display: "swap",
-  weight: "100 900",
-  variable: "--font-pretendard",
+  src: '../fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '100 900',
+  variable: '--font-pretendard',
 });
 
 export const metadata: Metadata = {
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: SITE.title,
     description: SITE.description,
-    type: "website",
-    locale: "ko_KR",
+    type: 'website',
+    locale: 'ko_KR',
   },
 };
 
@@ -42,6 +43,7 @@ export default function RootLayout({
           <main className="pt-16">{children}</main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
