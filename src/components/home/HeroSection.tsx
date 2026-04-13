@@ -19,7 +19,7 @@ export default function HeroSection() {
       const { splitText } = await import("animejs");
       const { animate, stagger } = await import("animejs");
 
-      const splitter = splitText(title);
+      const splitter = splitText(title, { chars: true });
 
       // Step 1: Split text blur reveal
       const titleAnim = animate(splitter.chars, {
