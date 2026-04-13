@@ -7,6 +7,7 @@ import SmoothScroll from '@/components/layout/SmoothScroll';
 import { SITE } from '@/lib/constants';
 import './globals.css';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
@@ -44,6 +45,7 @@ export default function RootLayout({
           <Footer />
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
